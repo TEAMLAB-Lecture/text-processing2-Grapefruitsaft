@@ -1,5 +1,5 @@
 #######################
-# Test Processing II  #
+# Text Processing II  #
 #######################
 
 
@@ -28,7 +28,17 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+    numbers = ['zero', 'one', 'two', 'three', 'four',
+               'five', 'six', 'seven', 'eight', 'nine']
+    digit_string = ""
+
+    cnt = 0
+    for c in input_string:
+        if c >= '0' and c <= '9':
+            if(cnt > 0):
+                digit_string += ' '
+            digit_string += numbers[int(c)]
+            cnt += 1
     return digit_string
 
 
@@ -64,5 +74,25 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+
+    camelcase_str = ""
+    print('original : ', underscore_str)
+    processed_list = underscore_str.split('_')
+    idx = 0
+    for sentence in processed_list:
+        if sentence == '':
+            continue
+        if len(processed_list) == 1:
+            tmp = sentence[0].lower() + sentence[1:]
+            camelcase_str += tmp
+            break
+        if idx == 0:
+            tmp = sentence.lower()
+            idx += 1
+        else:
+            tmp = sentence.lower().capitalize()
+
+        camelcase_str += tmp
+
+    print(camelcase_str)
     return camelcase_str
